@@ -22,19 +22,16 @@ public class Vegetable {
     private Long id;
 
     @Column(name = "name")
-    @NotBlank
     @NotNull
     @Size( min = 3 , max = 50)
     private String name;
 
     @Column(name = "price")
     @NotNull
-    @NotBlank
     private Double price;
 
     @Column(name = "is_grown_on_tree")
     @NotNull
-    @NotBlank
     private boolean isGrownOnTree;
 
 }

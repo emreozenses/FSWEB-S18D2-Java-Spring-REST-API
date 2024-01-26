@@ -1,15 +1,19 @@
-package com.workintech.FSWEBS18D2Java.Spring.REST.API.controller;
+package com.workintech.FSWEBS18D2Java.Spring.REST.API.services;
 
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.dao.VegetableRepository;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Vegetable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class VegetableServiceImpl implements VegetableService{
 
     private VegetableRepository vegetableRepository;
 
+    @Autowired
     public VegetableServiceImpl(VegetableRepository vegetableRepository) {
         this.vegetableRepository = vegetableRepository;
     }

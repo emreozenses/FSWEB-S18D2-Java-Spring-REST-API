@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface FruitRepository extends JpaRepository {
+public interface FruitRepository extends JpaRepository<Fruit,Long> {
 
     @Query(value = "SELECT f.id,f.name,f.price,f.fruit_type FROM fsweb.fruit as f ORDER BY f.price DESC", nativeQuery = true)
     List<Fruit> orderFruitByPriceDesc();

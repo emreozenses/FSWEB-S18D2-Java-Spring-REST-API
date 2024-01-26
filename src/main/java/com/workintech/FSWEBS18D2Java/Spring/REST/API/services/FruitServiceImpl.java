@@ -1,15 +1,19 @@
-package com.workintech.FSWEBS18D2Java.Spring.REST.API.controller;
+package com.workintech.FSWEBS18D2Java.Spring.REST.API.services;
 
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.dao.FruitRepository;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Fruit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class FruitServiceImpl implements FruitService{
 
     private FruitRepository fruitRepository;
 
+    @Autowired
     public FruitServiceImpl(FruitRepository fruitRepository) {
         this.fruitRepository = fruitRepository;
     }

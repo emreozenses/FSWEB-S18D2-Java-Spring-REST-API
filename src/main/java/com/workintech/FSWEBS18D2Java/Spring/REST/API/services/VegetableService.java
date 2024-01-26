@@ -1,4 +1,4 @@
-package com.workintech.FSWEBS18D2Java.Spring.REST.API.controller;
+package com.workintech.FSWEBS18D2Java.Spring.REST.API.services;
 
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Fruit;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Vegetable;

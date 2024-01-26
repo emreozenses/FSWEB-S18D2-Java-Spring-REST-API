@@ -25,19 +25,17 @@ public class Fruit {
 
     @Column(name = "name")
     @NotNull
-    @NotBlank(message = "name boş olamaz!")
+
     @Size(min = 3,max = 50,message = "3 den küçük , 50 den büyük karakter içeremez!")
     private String name;
 
     @Column(name = "price")
-    @NotBlank
+
     @NotNull
     private Double price;
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    @NotBlank
-    @Size(min = 3, max = 50)
     private FruitType fruitType;
 
 
