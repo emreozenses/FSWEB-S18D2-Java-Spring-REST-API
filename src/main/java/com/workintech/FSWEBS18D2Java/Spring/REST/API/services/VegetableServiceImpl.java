@@ -2,7 +2,10 @@ package com.workintech.FSWEBS18D2Java.Spring.REST.API.services;
 
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.dao.VegetableRepository;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Vegetable;
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.exceptions.VegetableException;
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.validations.VegetableValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,7 @@ public class VegetableServiceImpl implements VegetableService{
 
     @Override
     public Vegetable save(Vegetable vegetable) {
+        VegetableValidation.checkName(vegetable.getName());
         return (Vegetable) vegetableRepository.save(vegetable);
     }
 
@@ -34,8 +38,8 @@ public class VegetableServiceImpl implements VegetableService{
         if (foundVegetable.isPresent()){
             return foundVegetable.get();
         }
-        // throw new VegetableException;
-        return null;
+        throw new VegetableException("Vegetable with given id is not exist!", HttpStatus.NOT_FOUND);
+
     }
 
     @Override

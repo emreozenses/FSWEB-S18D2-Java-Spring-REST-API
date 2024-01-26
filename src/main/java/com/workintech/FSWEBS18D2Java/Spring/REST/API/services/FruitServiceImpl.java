@@ -2,7 +2,10 @@ package com.workintech.FSWEBS18D2Java.Spring.REST.API.services;
 
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.dao.FruitRepository;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Fruit;
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.exceptions.FruitException;
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.validations.FruitValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,7 @@ public class FruitServiceImpl implements FruitService{
 
     @Override
     public Fruit save(Fruit fruit) {
+        FruitValidation.checkName(fruit.getName());
         return (Fruit) fruitRepository.save(fruit);
     }
 
@@ -34,8 +38,8 @@ public class FruitServiceImpl implements FruitService{
         if (foundFruit.isPresent()){
             return foundFruit.get();
         }
-        //throw new FruitException;
-        return null;
+        throw new FruitException("Fruit with given id is not exist!", HttpStatus.NOT_FOUND);
+
     }
 
     @Override
