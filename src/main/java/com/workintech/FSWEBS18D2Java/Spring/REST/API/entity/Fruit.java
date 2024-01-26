@@ -2,6 +2,10 @@ package com.workintech.FSWEBS18D2Java.Spring.REST.API.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +20,24 @@ public class Fruit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Positive
     private Long id;
 
     @Column(name = "name")
+    @NotNull
+    @NotBlank(message = "name boş olamaz!")
+    @Size(min = 3,max = 50,message = "3 den küçük , 50 den büyük karakter içeremez!")
     private String name;
 
     @Column(name = "price")
+    @NotBlank
+    @NotNull
     private Double price;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 50)
     private FruitType fruitType;
 
 
