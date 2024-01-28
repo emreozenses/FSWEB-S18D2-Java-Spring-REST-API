@@ -1,5 +1,6 @@
 package com.workintech.FSWEBS18D2Java.Spring.REST.API.controller;
 
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.dto.VegetableResponse;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Fruit;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Vegetable;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.services.VegetableService;
@@ -34,8 +35,9 @@ public class VegetableController {
     }
 
     @GetMapping("/vegetables/{id}")
-    public Vegetable findById(@PathVariable Long id){
-        return vegetableService.findById(id);
+    public VegetableResponse findById(@PathVariable Long id){
+
+        return new VegetableResponse(vegetableService.findById(id).getName(),vegetableService.findById(id).getPrice()) ;
     }
 
     @PostMapping("/vegetables/{name}")

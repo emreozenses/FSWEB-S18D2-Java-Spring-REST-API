@@ -23,7 +23,7 @@ public class FruitServiceImpl implements FruitService{
 
     @Override
     public Fruit save(Fruit fruit) {
-        FruitValidation.checkName(fruit.getName());
+      //  FruitValidation.checkName(fruit.getName());
         return (Fruit) fruitRepository.save(fruit);
     }
 

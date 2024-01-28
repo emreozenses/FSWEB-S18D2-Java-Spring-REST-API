@@ -23,7 +23,7 @@ public class VegetableServiceImpl implements VegetableService{
 
     @Override
     public Vegetable save(Vegetable vegetable) {
-        VegetableValidation.checkName(vegetable.getName());
+        //VegetableValidation.checkName(vegetable.getName());
         return (Vegetable) vegetableRepository.save(vegetable);
     }
 
