@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +20,22 @@ public class GlobalErrorHandler {
 
     @ExceptionHandler
     public ResponseEntity<FruitErrorResponse> handleException (FruitException fruitException){
-    FruitErrorResponse fruitErrorResponse = new FruitErrorResponse(fruitException.getMessage());
-    log.error("FruitException occured!",fruitException.getMessage());
+    FruitErrorResponse fruitErrorResponse = new FruitErrorResponse(fruitException.getMessage(),fruitException.getHttpStatus().value(), LocalDateTime.now());
+    log.error("FruitException occured!",fruitErrorResponse.toString());
     return new ResponseEntity<>(fruitErrorResponse,fruitException.getHttpStatus());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<FruitErrorResponse> handleException (Exception exception){
+        FruitErrorResponse fruitErrorResponse = new FruitErrorResponse(exception.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
+        log.error("Exception occured!",fruitErrorResponse.toString());
+        return new ResponseEntity<>(fruitErrorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler
     public ResponseEntity<VegetableErrorResponse> handleException (VegetableException vegetableException){
         VegetableErrorResponse vegetableErrorResponse = new VegetableErrorResponse(vegetableException.getMessage());
-        log.error("VegetableException occured!",vegetableException.getMessage());
+        log.error("VegetableException occured!",vegetableErrorResponse.toString());
         return new ResponseEntity<>(vegetableErrorResponse,vegetableException.getHttpStatus());
     }
 
@@ -43,12 +51,7 @@ public class GlobalErrorHandler {
         return new ResponseEntity(errorList, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<VegetableErrorResponse> handleException (Exception exception){
-        VegetableErrorResponse errorResponse = new VegetableErrorResponse(exception.getMessage());
-        log.error("Exception occured!",exception.getMessage());
-        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
-    }
+
 
 
 

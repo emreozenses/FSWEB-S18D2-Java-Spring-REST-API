@@ -14,7 +14,7 @@ public interface VegetableRepository extends JpaRepository<Vegetable,Long> {
     @Query(value = "SELECT v.id,v.name,v.price,v.is_grown_on_tree FROM fsweb.vegetable as v ORDER BY v.price ASC",nativeQuery = true)
     List<Vegetable> orderVegByPriceAsc();
 
-    @Query(value = "SELECT v.id,v.name,v.price,v.is_grown_on_tree FROM fsweb.vegetable as v WHERE v.name ILIKE %:name%",nativeQuery = true)
+    @Query("SELECT v FROM Vegetable v WHERE v.name ILIKE %:name%")
     List<Vegetable> findByName(String name);
 
 }

@@ -1,9 +1,12 @@
 package com.workintech.FSWEBS18D2Java.Spring.REST.API.controller;
 
 
+import com.workintech.FSWEBS18D2Java.Spring.REST.API.dto.FruitResponse;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.entity.Fruit;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.services.FruitService;
 import com.workintech.FSWEBS18D2Java.Spring.REST.API.services.FruitServiceImpl;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -34,12 +37,13 @@ public class FruitController {
 }
 
 @GetMapping("/fruits/{id}")
-    public Fruit findById(@PathVariable Long id){
-        return fruitService.findById(id);
+    public FruitResponse findById(@Positive @PathVariable Long id){
+
+        return new FruitResponse("succeed",fruitService.findById(id)) ;
 }
 
 @PostMapping("/fruits/{name}")
-public List<Fruit> findByName(@PathVariable String name){
+public List<Fruit> findByName(@Size(min = 3,max = 50) @PathVariable String name){
         return fruitService.findFruitByName(name);
 }
 
@@ -50,7 +54,7 @@ public List<Fruit> findByName(@PathVariable String name){
 }
 
 @DeleteMapping("/fruits/{id}")
-    public Fruit delete(@PathVariable Long id){
+    public Fruit delete(@Positive @PathVariable Long id){
         return fruitService.delete(id);
 }
 

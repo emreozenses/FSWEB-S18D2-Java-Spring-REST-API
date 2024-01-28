@@ -14,9 +14,9 @@ import java.util.Optional;
 @Service
 public class VegetableServiceImpl implements VegetableService{
 
-    private VegetableRepository vegetableRepository;
+    private final VegetableRepository vegetableRepository;
 
-    @Autowired
+
     public VegetableServiceImpl(VegetableRepository vegetableRepository) {
         this.vegetableRepository = vegetableRepository;
     }
